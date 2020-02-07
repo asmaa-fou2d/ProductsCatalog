@@ -1,0 +1,70 @@
+﻿@model ProductsCatalog.Website.ViewModels.ProductViewModel
+
+@{
+  ViewBag.Title = @Model.Heading;
+}
+
+<h2>@Model.Heading</h2>
+
+@using (@Html.BeginForm(Model.Action, "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+  @Html.AntiForgeryToken()
+
+  @Html.HiddenFor(m => m.Id)
+
+  <div class="form-group">
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+    @Html.ValidationMessageFor(m => m.Name)
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(m => m.Price)
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Price)
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(m => m.Photo)
+
+    @if (@Model.Photo != null && @Model.Photo != "")
+    {
+      <input type="file" name="file" value="">
+      @Html.HiddenFor(model => model.Photo)
+      <img src="~/Uploads/@Model.Photo" id="myImg" width="200" />
+    }
+    else
+    {
+      <input type="file" name="file" value="" />
+      <img src="~/Uploads/@Model.Photo" id="myImg" width="200" hidden />
+    }
+  </div>
+  <button type="submit" class="btn btn-primary btn-lg">Save</button>
+  <button type="button" class="btn btn-danger btn-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Product") + "'");">Cancel</button>
+
+}
+
+
+@section scripts{
+  <script type="text/javascript">
+    $(function () {
+      $(":file").change(function () {
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = imageIsLoaded;
+          reader.readAsDataURL(this.files[0]);
+          $('#myImg').show();
+        }
+      });
+    });
+
+    function imageIsLoaded(e) {
+      $('#myImg').attr('src', e.target.result);
+      $('#myImg').show();
+    };
+
+  </script>
+
+
+}
