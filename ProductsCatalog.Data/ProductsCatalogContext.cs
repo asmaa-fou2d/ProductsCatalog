@@ -1,6 +1,6 @@
-﻿namespace ProductsCatalog.Website
+﻿namespace ProductsCatalog.Data
 {
-    using ProductsCatalog.Website.Entities;
+    using ProductsCatalog.Data.Entities;
     using System.Data.Entity;
 
     public class ProductsCatalogContext : DbContext

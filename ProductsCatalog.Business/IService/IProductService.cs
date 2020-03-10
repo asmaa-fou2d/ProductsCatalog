@@ -1,9 +1,6 @@
-﻿using ProductsCatalog.Website.DTOs;
-using System;
+﻿using ProductsCatalog.Business.DTOs;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ProductsCatalog.Business.IService
 {
@@ -16,11 +13,10 @@ namespace ProductsCatalog.Business.IService
         List<ProductDto> GetAllProducts();
 
         /// <summary>
-        /// Creare or update product
+        /// Creare product
         /// </summary>
         /// <param name="productDto">product Dto</param>
-        /// <returns>true or false</returns>
-        bool CreareOrUpdate(ProductDto productDto);
+        void Creare(ProductDto productDto);
 
         /// <summary>
         /// Get product by Id 
@@ -33,7 +29,12 @@ namespace ProductsCatalog.Business.IService
         /// Delete product 
         /// </summary>
         /// <param name="id">Product id</param>
-        /// <returns>true or false</returns>
-        bool Delete(int id);
+        void Delete(int id);
+
+        /// <summary>
+        /// Update product
+        /// </summary>
+        /// <param name="productDto">product Dto</param>
+        void Update(ProductDto productDto);
     }
 }

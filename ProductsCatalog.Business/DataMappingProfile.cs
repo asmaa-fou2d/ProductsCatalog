@@ -1,9 +1,9 @@
 ﻿
 using AutoMapper;
+using ProductsCatalog.Business.DTOs;
 using ProductsCatalog.Data.Entities;
-using ProductsCatalog.Website.DTOs;
 
-namespace ProductsCatalog.Website
+namespace ProductsCatalog.Business
 {
     public class DataMappingProfile : Profile
     {

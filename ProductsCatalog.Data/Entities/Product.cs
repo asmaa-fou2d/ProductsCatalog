@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace ProductsCatalog.Website.Entities
+namespace ProductsCatalog.Data.Entities
 {
     public class Product
     {

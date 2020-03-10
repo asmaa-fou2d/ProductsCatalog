@@ -1,46 +1,59 @@
-﻿using ProductsCatalog.Business.IService;
-using ProductsCatalog.Website.DTOs;
-using ProductsCatalog.Website.IRepositories;
-using System;
+﻿using AutoMapper;
+using ProductsCatalog.Business.DTOs;
+using ProductsCatalog.Business.IService;
+using ProductsCatalog.Data;
+using ProductsCatalog.Data.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductsCatalog.Business.Service
 {
     public class ProductService : IProductService
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         /// <inheritdoc />
-        public ProductService(IProductRepository productRepository)
+        public ProductService(IUnitOfWork unitOfWork)
         {
-            _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
         }
 
         /// <inheritdoc />
         public List<ProductDto> GetAllProducts()
         {
-            return _productRepository.GetAllProducts();
+            return Mapper.Map<List<ProductDto>>(_unitOfWork.Products.GetAll());
         }
 
         /// <inheritdoc />
-        public bool CreareOrUpdate(ProductDto productDto)
+        public void Creare(ProductDto productDto)
         {
-            return _productRepository.CreareOrUpdate(productDto);
+            _unitOfWork.Products.Add(Mapper.Map<Product>(productDto));
+            _unitOfWork.Complete();
         }
 
         /// <inheritdoc />
         public ProductDto GetProduct(int id)
         {
-            return _productRepository.GetProduct(id);
+            return Mapper.Map<ProductDto>(_unitOfWork.Products.Get(id));
         }
 
         /// <inheritdoc />
-        public bool Delete(int id)
+        public void Update(ProductDto productDto)
         {
-            return _productRepository.Delete(id);
+            //var list = new List<int>();
+            //list.Add(1);
+            //list.Remove(1);
+            //list.Find(1);
+            var pro = _unitOfWork.Products.Get(productDto.Id);
+            _unitOfWork.Products.Remove(pro);
+            _unitOfWork.Products.Add(Mapper.Map<Product>(productDto));
+            _unitOfWork.Complete();
+        }
+
+        /// <inheritdoc />
+        public void Delete(int id)
+        {
+            _unitOfWork.Products.Remove(_unitOfWork.Products.Get(id));
+            _unitOfWork.Complete();
         }
     }
 }

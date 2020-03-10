@@ -1,40 +1,35 @@
-﻿using ProductsCatalog.Website.DTOs;
-using ProductsCatalog.Website.Entities;
-using System;
+﻿using ProductsCatalog.Data.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProductsCatalog.Website.IRepositories
+namespace ProductsCatalog.Data.IRepositories
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
         /// <summary>
         /// Get  all products 
         /// </summary>
         /// <returns>list of products</returns>
-        List<ProductDto> GetAllProducts();
+        List<Product> GetProducts(int pageIndex,int pageSize);
 
         /// <summary>
         /// Creare or update product
         /// </summary>
         /// <param name="productDto">product Dto</param>
         /// <returns>true or false</returns>
-        bool CreareOrUpdate(ProductDto productDto);
+       // bool CreareOrUpdate(ProductDto productDto);
 
         /// <summary>
         /// Get product by Id 
         /// </summary>
         /// <param name="id">Product id</param>
         /// <returns>Product data</returns>
-        ProductDto GetProduct(int id);
+     //   ProductDto GetProduct(int id);
 
         /// <summary>
         /// Delete product 
         /// </summary>
         /// <param name="id">Product id</param>
         /// <returns>true or false</returns>
-        bool Delete(int id);
+        //bool Delete(int id);
     }
 }

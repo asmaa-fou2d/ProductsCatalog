@@ -1,6 +1,6 @@
 ﻿
 using AutoMapper;
-using ProductsCatalog.Website.DTOs;
+using ProductsCatalog.Business.DTOs;
 using ProductsCatalog.Website.ViewModels;
 
 namespace ProductsCatalog.Website

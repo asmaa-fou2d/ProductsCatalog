@@ -1,66 +1,68 @@
-﻿using AutoMapper;
-using ProductsCatalog.Website.DTOs;
-using ProductsCatalog.Website.Entities;
-using ProductsCatalog.Website.IRepositories;
-using System;
+﻿using ProductsCatalog.Data.Entities;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProductsCatalog.Data.IRepositories;
 
-namespace ProductsCatalog.Website.Repositories
+namespace ProductsCatalog.Data.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
-        private readonly ProductsCatalogContext _context;
+        public ProductsCatalogContext _productsCatalogContext => _context as ProductsCatalogContext;
 
-        public ProductRepository(ProductsCatalogContext context)
+        public ProductRepository(ProductsCatalogContext context) : base(context)
         {
-            _context = context;
         }
 
-        /// <inheritdoc />
-        public List<ProductDto> GetAllProducts()
+        public List<Product> GetProducts(int pageIndex, int pageSize)
         {
-            return Mapper.Map<List<ProductDto>>(_context.Products.OrderByDescending(p => p.Id).ToList());
+            return _productsCatalogContext.Products
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
         }
 
-        /// <inheritdoc />
-        public bool CreareOrUpdate(ProductDto productDto)
-        {
-            _context.Products.AddOrUpdate(Mapper.Map<Product>(productDto));
-            _context.SaveChanges();
-            return true;
-        }
 
-        /// <inheritdoc />
-        public ProductDto GetProduct(int id)
-        {
-            return Mapper.Map<ProductDto>(GetProductEntity(id));
-        }
+        ///// <inheritdoc />
+        //public List<ProductDto> GetAllProducts()
+        //{
+        //    return Mapper.Map<List<ProductDto>>(_context.Products.OrderByDescending(p => p.Id).ToList());
+        //}
 
-        /// <inheritdoc />
-        public bool Delete(int id)
-        {
-            var product = GetProductEntity(id);
-            if (product == null)
-                return false;
+        ///// <inheritdoc />
+        //public bool CreareOrUpdate(ProductDto productDto)
+        //{
+        //    _context.Products.AddOrUpdate(Mapper.Map<Product>(productDto));
+        //    _context.SaveChanges();
+        //    return true;
+        //}
 
-            _context.Products.Remove(product);
-            _context.SaveChanges();
-            return true;
+        ///// <inheritdoc />
+        //public ProductDto GetProduct(int id)
+        //{
+        //    return Mapper.Map<ProductDto>(GetProductEntity(id));
+        //}
 
-        }
+        ///// <inheritdoc />
+        //public bool Delete(int id)
+        //{
+        //    var product = GetProductEntity(id);
+        //    if (product == null)
+        //        return false;
 
-        /// <summary>
-        /// Get product by id 
-        /// </summary>
-        /// <param name="id">Product id</param>
-        /// <returns>product entity model</returns>
-        private Product GetProductEntity(int id)
-        {
-            return _context.Products.SingleOrDefault(p => p.Id == id);
-        }
+        //    _context.Products.Remove(product);
+        //    _context.SaveChanges();
+        //    return true;
+
+        //}
+
+        ///// <summary>
+        ///// Get product by id 
+        ///// </summary>
+        ///// <param name="id">Product id</param>
+        ///// <returns>product entity model</returns>
+        //private Product GetProductEntity(int id)
+        //{
+        //    return _context.Products.SingleOrDefault(p => p.Id == id);
+        //}
     }
 }

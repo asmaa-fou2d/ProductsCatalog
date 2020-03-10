@@ -1,19 +1,16 @@
-﻿namespace ProductsCatalog.Website.Migrations
+﻿namespace ProductsCatalog.Data.Migrations
 {
-    using ProductsCatalog.Website.Entities;
-    using System;
-    using System.Data.Entity;
+    using ProductsCatalog.Data.Entities;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ProductsCatalog.Website.ProductsCatalogContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ProductsCatalogContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ProductsCatalog.Website.ProductsCatalogContext context)
+        protected override void Seed(ProductsCatalogContext context)
         {
             //  This method will be called after migrating to the latest version.
 

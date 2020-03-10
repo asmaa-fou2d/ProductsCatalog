@@ -13,8 +13,9 @@ namespace ProductsCatalog.Website.App_Start
     using Ninject.Web.Common.WebHost;
     using ProductsCatalog.Business.IService;
     using ProductsCatalog.Business.Service;
-    using ProductsCatalog.Website.IRepositories;
-    using ProductsCatalog.Website.Repositories;
+    using ProductsCatalog.Data;
+    using ProductsCatalog.Data.IRepositories;
+    using ProductsCatalog.Data.Repositories;
 
     public static class NinjectWebCommon 
     {
@@ -50,6 +51,7 @@ namespace ProductsCatalog.Website.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
+                kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
                 kernel.Bind<IProductRepository>().To<ProductRepository>();
                 kernel.Bind<IProductService>().To<ProductService>();
 

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProductsCatalog.Website.DTOs
+﻿
+namespace ProductsCatalog.Business.DTOs
 {
     public class ProductDto
     {

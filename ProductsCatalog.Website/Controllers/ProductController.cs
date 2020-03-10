@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using ProductsCatalog.Business.DTOs;
 using ProductsCatalog.Business.IService;
-using ProductsCatalog.Website.DTOs;
 using ProductsCatalog.Website.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -44,7 +44,7 @@ namespace ProductsCatalog.Website.Controllers
             {
                 viewModel.Photo = UploadPhoto(file);
             }
-            _productService.CreareOrUpdate(Mapper.Map<ProductDto>(viewModel));
+            _productService.Creare(Mapper.Map<ProductDto>(viewModel));
             return RedirectToAction("Index");
         }
 
@@ -67,21 +67,20 @@ namespace ProductsCatalog.Website.Controllers
             {
                 viewModel.Photo = UploadPhoto(file);
             }
-            _productService.CreareOrUpdate(Mapper.Map<ProductDto>(viewModel));
+            _productService.Update(Mapper.Map<ProductDto>(viewModel));
             return RedirectToAction("Index");
 
         }
 
         public ActionResult Delete(int Id)
         {
-            bool result = _productService.Delete(Id);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            _productService.Delete(Id);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         private string UploadPhoto(HttpPostedFileBase file)
         {
             string fileName = "";
-
             fileName = Path.GetFileNameWithoutExtension(file.FileName) + "_" + Guid.NewGuid() +
             Path.GetExtension(file.FileName);
             file.SaveAs(Path.Combine(Server.MapPath("~/Uploads"), fileName));
