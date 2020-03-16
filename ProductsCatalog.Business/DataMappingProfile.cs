@@ -9,8 +9,12 @@ namespace ProductsCatalog.Business
     {
         public DataMappingProfile()
         {
-            CreateMap<ProductDto,Product>().ReverseMap();
+            CreateMap<ProductDto, Product>()
+             .ReverseMap()
+             .ForMember(p => p.CategoryName, opts => opts.MapFrom(src => src.Category.Name));
+
+            CreateMap<CategoryDto, Category>().ReverseMap();
         }
-       
+
     }
 }

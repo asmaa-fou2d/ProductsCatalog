@@ -12,13 +12,15 @@ namespace ProductsCatalog.Data
     {
         private readonly ProductsCatalogContext _productsCatalogContext;
 
-        public IProductRepository Products { get; private set; }
+        public IProductRepository ProductRepository { get; private set; }
 
+        public ICategoryRepository CategoryRepository { get; private set; }
 
         public UnitOfWork(ProductsCatalogContext productsCatalogContext)
         {
             _productsCatalogContext = productsCatalogContext;
-            Products = new ProductRepository(_productsCatalogContext);
+            ProductRepository = new ProductRepository(_productsCatalogContext);
+            CategoryRepository = new CategoryRepository(_productsCatalogContext);
         }
 
         public int Complete()

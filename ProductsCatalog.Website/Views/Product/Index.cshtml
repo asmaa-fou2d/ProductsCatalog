@@ -14,28 +14,30 @@
       <th style="text-align: center">Photo</th>
       <th>Name</th>
       <th>Price</th>
+      <th>Category Name</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     @foreach (var product in Model)
     {
-      <tr id="Row_@product.Id">
-        <td style="text-align: center"><img width="150" src="/Uploads/@product.Photo" /></td>
-        <td>@product.Name</td>
-        <td>@product.Price</td>
-        <td>
-          <a type="button" class="btn btn-primary" href="@Url.Action("Update","Product",new { id=product.Id})">
-            Edit
-          </a>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-product-Id="@product.Id" data-target="#deleteModal">Delete</button>
-        </td>
-      </tr>
+    <tr id="Row_@product.Id">
+      <td style="text-align: center"><img width="150" src="/Uploads/@product.Photo" /></td>
+      <td>@product.Name</td>
+      <td>@product.Price</td>
+      <td>@product.CategoryName</td>
+      <td>
+        <a type="button" class="btn btn-primary" href="@Url.Action("Update","Product",new { id=product.Id})">
+          Edit
+        </a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-product-Id="@product.Id" data-target="#deleteModal">Delete</button>
+      </td>
+    </tr>
     }
   </tbody>
 </table>
 
-<!-- Modal -->
+<!-- Modaml -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

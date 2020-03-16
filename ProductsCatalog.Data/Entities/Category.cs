@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProductsCatalog.Data.Entities
 {
-    public class Product
+    public class Category
     {
         [Key]
         public int Id { get; set; }
@@ -12,11 +13,6 @@ namespace ProductsCatalog.Data.Entities
 
         public string Photo { get; set; }
 
-        public double Price { get; set; }
-
-        public int CategoryId { get; set; }
-
-        public Category Category { get; set; }
-
+        public ICollection<Product> Products { get; set; }
     }
 }

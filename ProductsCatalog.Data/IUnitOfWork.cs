@@ -5,7 +5,8 @@ namespace ProductsCatalog.Data
 {
     public interface IUnitOfWork : IDisposable
     {
-        IProductRepository Products { get; }
+        IProductRepository ProductRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
 
         int Complete();
     }

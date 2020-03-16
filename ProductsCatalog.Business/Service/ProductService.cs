@@ -18,22 +18,29 @@ namespace ProductsCatalog.Business.Service
         }
 
         /// <inheritdoc />
-        public List<ProductDto> GetAllProducts()
+        public List<ProductDto> GetAll(int? categoryId)
         {
-            return Mapper.Map<List<ProductDto>>(_unitOfWork.Products.GetAll());
+            if (categoryId == null)
+            {
+                return Mapper.Map<List<ProductDto>>(_unitOfWork.ProductRepository.GetAll(null,"Category"));
+            }
+            else
+            {
+                return Mapper.Map<List<ProductDto>>(_unitOfWork.ProductRepository.GetAll(p => p.CategoryId == categoryId, "Category"));
+            }
         }
 
         /// <inheritdoc />
         public void Creare(ProductDto productDto)
         {
-            _unitOfWork.Products.Add(Mapper.Map<Product>(productDto));
+            _unitOfWork.ProductRepository.Add(Mapper.Map<Product>(productDto));
             _unitOfWork.Complete();
         }
 
         /// <inheritdoc />
-        public ProductDto GetProduct(int id)
+        public ProductDto GetById(int id)
         {
-            return Mapper.Map<ProductDto>(_unitOfWork.Products.Get(id));
+            return Mapper.Map<ProductDto>(_unitOfWork.ProductRepository.Get(id));
         }
 
         /// <inheritdoc />
@@ -43,16 +50,16 @@ namespace ProductsCatalog.Business.Service
             //list.Add(1);
             //list.Remove(1);
             //list.Find(1);
-            var pro = _unitOfWork.Products.Get(productDto.Id);
-            _unitOfWork.Products.Remove(pro);
-            _unitOfWork.Products.Add(Mapper.Map<Product>(productDto));
+            var pro = _unitOfWork.ProductRepository.Get(productDto.Id);
+            _unitOfWork.ProductRepository.Remove(pro);
+            _unitOfWork.ProductRepository.Add(Mapper.Map<Product>(productDto));
             _unitOfWork.Complete();
         }
 
         /// <inheritdoc />
         public void Delete(int id)
         {
-            _unitOfWork.Products.Remove(_unitOfWork.Products.Get(id));
+            _unitOfWork.ProductRepository.Remove(_unitOfWork.ProductRepository.Get(id));
             _unitOfWork.Complete();
         }
     }

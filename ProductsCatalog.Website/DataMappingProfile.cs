@@ -10,6 +10,8 @@ namespace ProductsCatalog.Website
         public ViewMappingProfile()
         {
             CreateMap<ProductDto, ProductViewModel>().ReverseMap();
+
+            CreateMap<CategoryDto, CategoryViewModel>().ReverseMap();
         }
     }
 }

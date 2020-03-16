@@ -10,7 +10,7 @@ namespace ProductsCatalog.Business.IService
         /// Get  all products 
         /// </summary>
         /// <returns>list of products</returns>
-        List<ProductDto> GetAllProducts();
+        List<ProductDto> GetAll(int? categoryId);
 
         /// <summary>
         /// Creare product
@@ -23,7 +23,7 @@ namespace ProductsCatalog.Business.IService
         /// </summary>
         /// <param name="id">Product id</param>
         /// <returns>Product data</returns>
-        ProductDto GetProduct(int id);
+        ProductDto GetById(int id);
 
         /// <summary>
         /// Delete product 

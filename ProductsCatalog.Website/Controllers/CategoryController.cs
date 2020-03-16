@@ -11,78 +11,71 @@ using System.Web.Mvc;
 
 namespace ProductsCatalog.Website.Controllers
 {
-    public class ProductController : Controller
+    public class CategoryController : Controller
     {
-        private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
 
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
-            _productService = productService;
             _categoryService = categoryService;
         }
 
-        public ActionResult Index(int? categoryId)
+        // GET: Category
+        public ActionResult Index()
         {
-            var result = Mapper.Map<List<ProductViewModel>>(_productService.GetAll(categoryId));
+            var result = Mapper.Map<List<CategoryViewModel>>(_categoryService.GetAll());
             return View(result);
         }
 
+
         public ActionResult Create()
         {
-            var product = new ProductViewModel
-            {
-                CategoriesList = Mapper.Map<List<CategoryViewModel>>(_categoryService.GetAll())
-            };
-            return View("ProductForm", product);
+            return View("CategoryForm", new CategoryViewModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductViewModel viewModel, HttpPostedFileBase file)
+        public ActionResult Create(CategoryViewModel viewModel, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
-                viewModel.CategoriesList = Mapper.Map<List<CategoryViewModel>>(_categoryService.GetAll());
-                return View("ProductForm", viewModel);
+                return View("CategoryForm", viewModel);
             }
             if (file != null)
             {
                 viewModel.Photo = UploadPhoto(file);
             }
-            _productService.Creare(Mapper.Map<ProductDto>(viewModel));
+            _categoryService.Creare(Mapper.Map<CategoryDto>(viewModel));
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Update(int Id)
         {
-            var productViewModel = Mapper.Map<ProductViewModel>(_productService.GetById(Id));
-            productViewModel.CategoriesList = Mapper.Map<List<CategoryViewModel>>(_categoryService.GetAll());
-            return View("ProductForm", productViewModel);
+            var categoryViewModel = Mapper.Map<CategoryViewModel>(_categoryService.GetById(Id));
+            return View("CategoryForm", categoryViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(ProductViewModel viewModel, HttpPostedFileBase file)
+        public ActionResult Update(CategoryViewModel viewModel, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
-                viewModel.CategoriesList = Mapper.Map<List<CategoryViewModel>>(_categoryService.GetAll());
-                return View("ProductForm", viewModel);
+                return View("CategoryForm", viewModel);
             }
             if (file != null)
             {
                 viewModel.Photo = UploadPhoto(file);
             }
-            _productService.Update(Mapper.Map<ProductDto>(viewModel));
+            _categoryService.Update(Mapper.Map<CategoryDto>(viewModel));
             return RedirectToAction("Index");
 
         }
 
         public ActionResult Delete(int Id)
         {
-            _productService.Delete(Id);
+            _categoryService.Delete(Id);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -91,8 +84,9 @@ namespace ProductsCatalog.Website.Controllers
             string fileName = "";
             fileName = Path.GetFileNameWithoutExtension(file.FileName) + "_" + Guid.NewGuid() +
             Path.GetExtension(file.FileName);
-            file.SaveAs(Path.Combine(Server.MapPath("~/Uploads"), fileName));
+            file.SaveAs(Path.Combine(Server.MapPath("~/Uploads/Category"), fileName));
             return fileName;
         }
+
     }
 }

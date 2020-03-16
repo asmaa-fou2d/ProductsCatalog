@@ -7,13 +7,13 @@ namespace ProductsCatalog.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class InitDatabase : IMigrationMetadata
+    public sealed partial class addcategories : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addcategories));
         
         string IMigrationMetadata.Id
         {
-            get { return "202002052108572_InitDatabase"; }
+            get { return "202003161535067_add-categories"; }
         }
         
         string IMigrationMetadata.Source
