@@ -36,5 +36,12 @@ namespace ProductsCatalog.Business.IService
         /// </summary>
         /// <param name="productDto">product Dto</param>
         void Update(ProductDto productDto);
+
+        /// <summary>
+        /// Get random products
+        /// </summary>
+        /// <returns>list of products</returns>
+        List<ProductDto> GetRandomProducts();
+
     }
 }

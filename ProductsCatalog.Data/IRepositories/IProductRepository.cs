@@ -10,5 +10,12 @@ namespace ProductsCatalog.Data.IRepositories
         /// </summary>
         /// <returns>list of products</returns>
         List<Product> GetProducts(int pageIndex,int pageSize);
+
+        /// <summary>
+        /// Get random products
+        /// </summary>
+        /// <returns>list of products</returns>
+        List<Product> GetRandomProducts();
+        
     }
 }

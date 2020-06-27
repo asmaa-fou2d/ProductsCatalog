@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProductsCatalog.Website.ViewModels.SlideshowViewModel>
+
+<section id="slider">
+  <!--slider-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+
+            @foreach (var slide in Model)
+            {
+              string className = "";
+              if (Model.First() == slide)
+              {
+                className = "active";
+              }
+              <li data-target="#slider-carousel" data-slide-to="@slide.Id" class="@className"></li>
+            }
+
+          </ol>
+
+          <div class="carousel-inner">
+
+            @foreach (var slide in Model)
+            {
+              string className = "item";
+              if (Model.First() == slide)
+              {
+                className = "item active";
+              }
+              <div class="@className">
+                <div class="col-sm-6">
+                  <h1>@slide.Title</h1>
+                  <h2>@slide.SubTitle</h2>
+                  <p>@slide.Description</p>
+                </div>
+                <div class="col-sm-6">
+                  <img src="/Uploads/@slide.Photo" class="girl img-responsive" alt="" />
+                </div>
+              </div>
+            }
+          </div>
+          <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

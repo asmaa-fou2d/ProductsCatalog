@@ -50,11 +50,17 @@
     <Compile Include="DataMappingProfile.cs" />
     <Compile Include="DTOs\CategoryDto.cs" />
     <Compile Include="DTOs\ProductDto.cs" />
+    <Compile Include="DTOs\SlideshowDto.cs" />
+    <Compile Include="DTOs\WishListDto.cs" />
     <Compile Include="IService\ICategoryService.cs" />
     <Compile Include="IService\IProductService.cs" />
+    <Compile Include="IService\ISlideshowService.cs" />
+    <Compile Include="IService\IWishListService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CategoryService.cs" />
     <Compile Include="Service\ProductService.cs" />
+    <Compile Include="Service\SlideshowService.cs" />
+    <Compile Include="Service\WishListService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProductsCatalog.Data\ProductsCatalog.Data.csproj">
@@ -63,6 +69,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

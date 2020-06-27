@@ -1,4 +1,5 @@
-﻿using ProductsCatalog.Website.App_Start;
+﻿using Owin;
+using ProductsCatalog.Website.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;

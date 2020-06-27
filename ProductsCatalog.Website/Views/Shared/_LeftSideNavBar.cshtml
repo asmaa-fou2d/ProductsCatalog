@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ProductsCatalog.Website.ViewModels.CategoryViewModel>
+
+<div class="col-sm-3">
+  <div class="left-sidebar">
+    <h2>Category</h2>
+    <div class="panel-group category-products" id="accordian">
+      <!--category-productsr-->
+      @foreach (var category in Model)
+      {
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title"><a href="@Url.Action("ViewProducts","Home",new {categoryId= @category.Id})">@category.Name</a></h4>
+          </div>
+        </div>
+      }
+    </div><!--/category-products-->
+  </div>
+</div>

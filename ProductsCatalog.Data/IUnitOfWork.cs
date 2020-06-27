@@ -7,6 +7,8 @@ namespace ProductsCatalog.Data
     {
         IProductRepository ProductRepository { get; }
         ICategoryRepository CategoryRepository { get; }
+        ISlideshowRepository SlideshowRepository { get; }
+        IWishListRepository WishListRepository { get; }
 
         int Complete();
     }

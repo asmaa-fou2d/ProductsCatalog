@@ -62,5 +62,11 @@ namespace ProductsCatalog.Business.Service
             _unitOfWork.ProductRepository.Remove(_unitOfWork.ProductRepository.Get(id));
             _unitOfWork.Complete();
         }
+
+        /// <inheritdoc />
+        public List<ProductDto> GetRandomProducts()
+        {
+            return Mapper.Map<List<ProductDto>>(_unitOfWork.ProductRepository.GetRandomProducts());
+        }
     }
 }

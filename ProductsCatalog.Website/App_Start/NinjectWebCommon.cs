@@ -52,10 +52,20 @@ namespace ProductsCatalog.Website.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+
+
+                kernel.Bind<IWishListRepository>().To<WishListRepository>();
+                kernel.Bind<IWishListService>().To<WishListService>();
+
                 kernel.Bind<IProductRepository>().To<ProductRepository>();
                 kernel.Bind<IProductService>().To<ProductService>();
+
                 kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
                 kernel.Bind<ICategoryService>().To<CategoryService>();
+
+                kernel.Bind<ISlideshowRepository>().To<SlideshowRepository>();
+                kernel.Bind<ISlideshowService>().To<SlideshowService>();
+
 
                 RegisterServices(kernel);
                 return kernel;

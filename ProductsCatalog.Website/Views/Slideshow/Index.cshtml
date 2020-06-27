@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ProductsCatalog.Website.ViewModels.SlideshowViewModel>
+
+@{
+  ViewBag.Title = "Index";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Slideshow</h2>
+
+<button type="button" class="btn btn-success" onclick="@("window.location.href='" + @Url.Action("Create", "Slideshow") + "'");">Add new slideshow</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="text-align: center">Photo</th>
+      <th>Title</th>
+      <th>SubTitle</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var slide in Model)
+    {
+      <tr id="Row_@slide.Id">
+        <td style="text-align: center"><img width="150" src="/Uploads/@slide.Photo" /></td>
+        <td>@slide.Title</td>
+        <td>@slide.SubTitle</td>
+        <td>
+          <a type="button" class="btn btn-primary" href="@Url.Action("Update","Slideshow",new { id=slide.Id})">
+            Edit
+          </a>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-slide-Id="@slide.Id" data-target="#deleteModal">Delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<!-- Modaml -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete</h5>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this slide?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" id="confirmDelete">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+@section scripts{
+  <script type="text/javascript">
+
+    var slideId;
+    $('#deleteModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      slideId = button.data('slide-Id')
+    });
+
+    $("#confirmDelete").click(function () {
+      $.ajax({
+        type: "Get",
+        url: '/Slideshow/Delete/' + slideId,
+        success: function (result) {
+          if (result) {
+            $('#deleteModal').modal('hide');
+            $('#Row_' + slideId).remove();
+          }
+          else {
+            console.log("There is something wrong");
+          }
+        }
+      });
+    });
+  </script>
+
+}

@@ -1,7 +1,8 @@
 ﻿@model ProductsCatalog.Website.ViewModels.ProductViewModel
 
 @{
-  ViewBag.Title = @Model.Heading;
+    ViewBag.Title = @Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.Heading</h2>
@@ -72,6 +73,4 @@
     };
 
   </script>
-
-
 }

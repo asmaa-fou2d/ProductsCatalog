@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ProductsCatalog.Data.IRepositories;
+using System;
 
 namespace ProductsCatalog.Data.Repositories
 {
@@ -19,6 +20,12 @@ namespace ProductsCatalog.Data.Repositories
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-        } 
+        }
+
+        public List<Product> GetRandomProducts()
+        {
+
+            return _productsCatalogContext.Products.OrderBy(x => Guid.NewGuid()).Take(6).ToList();
+        }
     }
 }

@@ -11,6 +11,8 @@ using System.Web.Mvc;
 
 namespace ProductsCatalog.Website.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
