@@ -7,7 +7,6 @@
 * [Enhancement](#Enhancement)
 * [Demo](#demo)
 
-
 ## General info
 Product Catalog is an e-market project that will be helpful for a small business.
 	
