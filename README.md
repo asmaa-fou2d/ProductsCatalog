@@ -29,20 +29,20 @@ PM> Update-Database
 * Admin Side, 
     Admin Can Manage his own categories and products. 
     Admin can add and edit his own Slideshow that will be helpful if there is a new announcement.
-2-User Side,
+* User Side,
     Users can browse all product and add any of them to his wishlist.
 
 ## UpcomingFeatures
-1- Add To Cart 
-2- Place order 
-3- Payment 
+*  Add To Cart 
+*  Place order 
+*  Payment 
 
 ## Enhancement
-1- Code Refactoring 
-2- Pagenation 
-3- Product details page 
-4- Registration & User Account 
-5- Test Cycle 
+*  Code Refactoring 
+*  Pagenation 
+*  Product details page 
+*  Registration & User Account 
+*  Test Cycle 
 
 ## Demo
 You can check live demo here
